@@ -1,0 +1,90 @@
+package svpa;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class serverClass extends Thread{
+
+	Socket sock1;
+	ServerSocket serv;
+	
+	DataOutputStream dos;// import필요(위에꺼 선택)
+	DataInputStream dis; // import필요(위에꺼 선택)
+	
+	String Gets;
+	String Svg="F";
+	String Type="";
+	
+	public void Send(String text) throws IOException
+	{
+		dis = new DataInputStream(sock1.getInputStream());
+		dos = new DataOutputStream(sock1.getOutputStream());
+
+		dos.writeUTF(text);
+		dos.flush(); // 메세지 전송
+	}
+	
+	public String getDate()
+	{
+	    Date date = new Date();
+
+	    Format formatter = new SimpleDateFormat("[hh:mm:ss]");
+	    
+	    return formatter.format(date);
+	}
+	
+	public String isGets()
+	{
+		if(Gets!=Svg)
+		{
+			Svg=Gets;
+			return Gets;
+		}
+		else return "N";
+	}
+	
+	public void close() throws IOException
+	{
+		dis.close();
+		dos.close();
+		sock1.close();
+		serv.close();
+	}
+	
+	public void on(int sock)throws IOException
+	{
+		serv = new ServerSocket(sock);
+		sock1 = serv.accept();
+
+		System.out.println(getDate()+sock1.getInetAddress() + " : ");
+
+		// 메세지 연속 송수신
+		dos = new DataOutputStream(sock1.getOutputStream());
+		dis = new DataInputStream(sock1.getInputStream());
+
+		new Thread(){
+			public void run(){
+				while(true){
+					String msg = null;
+					try {
+						msg = dis.readUTF();
+						System.out.println("상대 : " + msg);
+					} catch (IOException e) {
+					}
+					Gets=msg;
+				}
+			}
+		}.start();
+	}
+	public serverClass(String n) throws IOException{
+		Type = n;
+	}
+
+}
+

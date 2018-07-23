@@ -1,0 +1,13 @@
+import java.util.*;
+
+abstract class a implements HelloListener
+{
+    public static void main(String[] args) {
+        Initiater initiater = new Initiater();
+        Responder responder = new Responder();
+
+        initiater.addListener(responder);
+
+        initiater.sayHello();  // 누가 "Hello!!"라고 하면 다른 객체들이 "Hello there..."이라고 대답한다. 
+    }
+}

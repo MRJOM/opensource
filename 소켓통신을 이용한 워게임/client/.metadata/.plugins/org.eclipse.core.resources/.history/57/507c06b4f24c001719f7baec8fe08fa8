@@ -1,0 +1,66 @@
+package cl;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import javax.swing.JOptionPane;
+
+public class cl extends Thread{
+
+	Socket Client;
+	String Gets;
+	String Svg="F";
+	
+	public String isGets()
+	{
+		if(Gets!=Svg)
+		{
+			Svg=Gets;
+			return Gets;
+		}
+		else return "N";
+	}
+	
+	public void close() throws IOException
+	{
+		Client.close();
+	}
+	
+	public void Send(String text) throws IOException
+	{
+		DataInputStream dis = new DataInputStream(Client.getInputStream());
+		DataOutputStream dos = new DataOutputStream(Client.getOutputStream());
+		
+		try {
+			dos.writeUTF(text);
+			dos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public cl(String ip,int sock) throws IOException{
+		Client = new Socket(ip,sock);
+
+		DataInputStream dis = new DataInputStream(Client.getInputStream());
+		DataOutputStream dos = new DataOutputStream(Client.getOutputStream());
+		
+		new Thread(){
+			public void run(){
+				while(true){
+					String msg = null;
+					try {
+						msg = dis.readUTF();
+					} catch (IOException e) {
+						//e.printStackTrace();
+					}
+					Gets=msg;
+					System.out.println(Gets);
+				}
+			}
+		}.start();
+
+	}
+}

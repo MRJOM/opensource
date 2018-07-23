@@ -1,0 +1,9 @@
+
+
+class a implement Listener
+{
+           public static void main()
+           {
+                         B myb  =  new B( this);
+           }
+}

@@ -1,0 +1,12 @@
+import java.util.EventListener;
+
+interface CustomListener extends EventListener {
+    public void processCustomEvent(CustomEvent event);
+}
+
+class CustomAdapter implements EventListener {
+    public void processCustomEvent(CustomEvent event) {
+    }
+}
+
+

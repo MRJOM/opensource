@@ -1,0 +1,13 @@
+class a implement Listener
+{
+      void Listener ()
+      {
+               // 어떤 일이 일어났다는 사실을 알았을 때 
+               // 처리 할 일
+       }
+
+       public static void main()
+       {
+                     B myb  =  new B( this);
+       }
+}

@@ -1,0 +1,3 @@
+interface onTapCallback {
+    void onTap();
+}

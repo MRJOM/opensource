@@ -1,0 +1,25 @@
+public class CustomComponent {
+    .... 이벤트에 관련된 코드만 봅시다!
+ 
+    protected EventListenerList listenerList = new EventListenerList();
+ 
+    public void addCustomEventListener(CustomEventListener listener) {
+        listenerList.add(CustomEventListener.class, listener);
+    }
+ 
+    public void removeCustomEventListener(CustomEventListener listener) {
+        listenerList.remove(CustomEventListener.class, listener);
+    }
+ 
+    private void fireCustomEvent(CustomEvent event) {
+        Object[] listeners = listenerList.getListenerList();
+ 
+        for (int i = listeners.length-2; i>=0; i-=2) {
+            if (listeners[i] == CustomEventListener.class) {
+                ((CustomEventListener)listeners[i+1]).customEvent(event);
+            }
+        }
+    }
+ 
+    .... 이벤트에 관련된 코드만 봅시다!
+}

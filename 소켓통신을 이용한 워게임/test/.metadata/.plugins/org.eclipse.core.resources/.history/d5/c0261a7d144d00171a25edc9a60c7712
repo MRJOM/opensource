@@ -1,0 +1,44 @@
+class Callee {
+    
+    interface Callback { // 인터페이스는 외부에 구현해도 상관 없습니다.
+        void callbackMethod();
+    }
+    
+    private boolean m_condition;
+    private Callback m_callback;
+    
+    public Callee() {
+        m_condition = false;
+        m_callback = null;
+    }
+    
+    public setCallback(Callback callback) {
+        this.m_callback = callback;
+    }
+    
+    // 콜백 메서드를 호출할 수 있는지 확인
+    private checkCondition() {
+        if(m_condition && (m_callback != null))
+            m_callback.callbackMethod(); // 가능하면 콜백 메서드 호출
+    }
+    
+    ...
+}
+
+class Caller {
+    
+    private Callee callee;
+    private int value;
+    
+    public Caller() {
+        Callee.Callback callback = new Callee.Callback() {
+            @Override
+            public void callbackMethod() {
+                // 이곳에 콜백 메서드에서 할일을 구현 (값 전달, 복사...)
+            }
+        callee.setCallback(callback);
+        ...
+    }
+    
+    ...
+}

@@ -1,0 +1,5 @@
+import java.util.EventListener;
+
+public interface CustomEventListener extends EventListener {
+    void customEvent(CustomEvent event);
+}

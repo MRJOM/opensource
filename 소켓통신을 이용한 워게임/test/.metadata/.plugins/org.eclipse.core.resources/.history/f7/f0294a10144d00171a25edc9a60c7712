@@ -1,0 +1,12 @@
+import java.util.EventObject;
+ 
+public class CustomEvent extends EventObject {
+    public CustomEvent(Object source) {
+        super(source);
+    }
+}
+import java.util.EventListener;
+
+public interface CustomEventListener extends EventListener {
+    void customEvent(CustomEvent event);
+}

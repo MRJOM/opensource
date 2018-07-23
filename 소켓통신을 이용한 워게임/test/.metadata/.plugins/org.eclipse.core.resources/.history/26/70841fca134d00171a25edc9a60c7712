@@ -1,0 +1,24 @@
+import java.util.EventObject;
+
+class CustomEvent extends EventObject {
+    protected String msg;
+    
+    public CustomEvent(Object source, String msg) {
+        super(source);
+        this.msg = msg;
+    }
+    
+    public String getMsg() {
+        return this.msg;
+    }
+}
+import java.util.EventListener;
+
+interface CustomListener extends EventListener {
+    public void processCustomEvent(CustomEvent event);
+}
+
+class CustomAdapter implements EventListener {
+    public void processCustomEvent(CustomEvent event) {
+    }
+}

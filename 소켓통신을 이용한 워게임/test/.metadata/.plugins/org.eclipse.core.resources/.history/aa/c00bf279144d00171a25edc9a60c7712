@@ -1,0 +1,5 @@
+interface onTapCallback {
+    void onTap();
+}
+
+onTapCallback cbOnTap = null;

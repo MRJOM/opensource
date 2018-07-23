@@ -1,0 +1,37 @@
+package cl;
+
+public class ma extends Thread{
+
+	cl gameServ;
+	
+	public static void connectGsv(String port)
+	{
+		System.out.println(Integer.parseInt(Temp));
+		cl gameServ = new cl("127.0.0.1",Integer.parseInt(Temp),cb);
+		gameServ.Send("Hello");
+	}
+	public static void main(String[] args) throws Exception{
+		
+		String Temp;
+		System.out.println("Connect to Login Server Port : 8585");
+		cl a = new cl("127.0.0.1",8484,cb);
+				
+		//Thread.sleep(100);
+		//System.out.println(Integer.parseInt(Temp));
+		//cl gameServ = new cl("127.0.0.1",Integer.parseInt(Temp),cb);
+		//gameServ.Send("Hello");
+		
+	}
+	
+    private static CallBack cb = new CallBack() {
+        @Override
+        public void callBackMethod(Object obj) {
+            String result = (String) obj;
+            System.out.println(result);
+            if (result.indexOf("85")!=-1)
+            {
+            	
+            }
+        }
+    };
+}

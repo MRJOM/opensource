@@ -1,0 +1,10 @@
+import java.util.*;
+
+interface HelloListener {
+    void someoneSaidHello();
+}
+
+abstract class a implements HelloListener
+{
+
+}
